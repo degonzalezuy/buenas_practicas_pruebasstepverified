@@ -19,4 +19,17 @@ public class Servicio {
     public Flux<String> buscarTodosLento(){
         return Flux.just("Pedro", "Maria", "Jesus", "Carmen").delaySequence(Duration.ofSeconds(20));
     }
+
+    //Implementando publicador
+    public Flux<String> buscarTodosFiltro() {
+        Flux<String> source = Flux.just("John", "Monica", "Mark", "Cloe", "Frank", "Casper", "Olivia", "Emily", "Cate")
+                .filter(name -> name.length() == 4)
+                .map(String::toUpperCase);
+
+        Flux<String> error = source.concatWith(
+                Mono.error(new IllegalArgumentException("Mensaje de Error"))
+        );
+        return source;
+    }
+
 }

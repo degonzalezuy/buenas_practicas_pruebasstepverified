@@ -44,4 +44,19 @@ public class ServicioTest {
                 .expectNext("Carmen")
                 .thenAwait(Duration.ofSeconds(1)).verifyComplete();
     }
+
+    //Probando el publicador implementado
+    @Test
+    void testTodosFiltro(){
+        Flux<String> source = servicio.buscarTodosFiltro();
+        StepVerifier
+                .create(source)
+                .expectNext("JOHN")
+                .expectNextMatches(name -> name.startsWith("MA"))
+                .expectNext("CLOE", "CATE")
+                .expectComplete()
+                .verify();
+    }
+
 }
+
