@@ -22,7 +22,8 @@ public class Servicio {
 
     //Implementando publicador
     public Flux<String> buscarTodosFiltro() {
-        Flux<String> source = Flux.just("John", "Monica", "Mark", "Cloe", "Frank", "Casper", "Olivia", "Emily", "Cate")
+        Flux<String> source = Flux.just("John", "Monica", "Mark", "Cloe",
+                                        "Frank", "Casper", "Olivia", "Emily", "Cate")
                 .filter(name -> name.length() == 4)
                 .map(String::toUpperCase);
 
